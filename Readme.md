@@ -12,14 +12,23 @@ Label: x1, y1, x2, y2, x3, y3, x4, y4, theta, x, y, width, height </br>
 
 Though it provides theta for each bounding box, it is not within the angle range that I want. You can check out how I calculated the angle that I need in tools/load.py.
 
-### Loss Function
+### Features
+
+---
+#### Loss Function (only for x, y, w, h, theta)
 
 <img src="./images/loss.png" alt="loss" height="90"/>
 <img src="./images/angle.png" alt="angle" height="70"/>
 
 I implemented the loss function proposed by [R3Det: Refined Single-Stage Detector with Feature Refinement for Rotating Object](https://arxiv.org/abs/1908.05612) and made some adjustments for myself.
 
-### Recall
+---
+#### Scheduler
+Cosine Annealing with Warmup (Reference: [Cosine Annealing with Warmup for PyTorch](https://github.com/katsura-jp/pytorch-cosine-annealing-with-warmup))
+<img src="./images/scheduler.png" alt="scheduler" height="70"/>
+
+---
+#### Recall
 
 <img src="./images/recall.png" alt="recall" height="300"/>
 
@@ -68,8 +77,8 @@ R-YOLOv4/
     ├── scheduler.py
     └── utils.py
 ├── weights
-    ├── yolov4.pth
-    └── AOD_800.pth
+    ├── yolov4.pth (for training)
+    └── AOD_800.pth (for testing and detection)
 ├── data
     ├── coco.names
     ├── train
@@ -134,8 +143,10 @@ usage: test.py [-h] [--test_folder TEST_FOLDER] [--weights_path WEIGHTS_PATH] [-
 ### Detect
 
 ```
-usage: detect.py [-h] [--image_folder IMAGE_FOLDER] [--weights_path WEIGHTS_PATH] [--class_path CLASS_PATH]
-                 [--conf_thres CONF_THRES] [--nms_thres NMS_THRES] [--batch_size BATCH_SIZE] [--img_size IMG_SIZE]
+usage: detect.py [-h] [--image_folder IMAGE_FOLDER] [--output_folder OUTPUT_FOLDER] [--weights_path WEIGHTS_PATH]
+                 [--class_path CLASS_PATH] [--conf_thres CONF_THRES] [--nms_thres NMS_THRES]
+                 [--batch_size BATCH_SIZE] [--img_size IMG_SIZE]
+
 ```
 
 <img src="./outputs/P0292.png" alt="car" height="430"/>
