@@ -50,8 +50,8 @@ $ pip install -r requirements.txt
 * Dataset c
 I have  provided some datasets example on my github. Still, you have to download the others by yourself and arrange it in the correct directories like I do.
 * Weights </br>
-[yolov4 pretrained weights](https://drive.google.com/uc?export=download&id=1UDp_DB2gbPSzBIpgAJuLIFqu8hgl57Ip) </br>
-[UCAS-AOD weights](https://drive.google.com/uc?export=download&id=1sVD2d_y9VDirA-XOdcVDKCDrQw3e7ZJY) (weights that I have already trained for this dataset)
+[yolov4 pretrained weights](https://drive.google.com/uc?export=download&id=1sVD2d_y9VDirA-XOdcVDKCDrQw3e7ZJY) </br>
+[UCAS-AOD weights](https://drive.google.com/uc?export=download&id=1UDp_DB2gbPSzBIpgAJuLIFqu8hgl57Ip) (weights that I have already trained for this dataset)
 
 3. Make sure your files arrangment looks like the following
 ```
