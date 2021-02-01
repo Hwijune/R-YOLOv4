@@ -4,6 +4,7 @@ import glob
 import random
 import os
 import numpy as np
+import cv2 as cv
 from PIL import Image
 import torch
 import torch.nn.functional as F
@@ -11,7 +12,6 @@ from torch.utils.data import Dataset
 from torchvision.datasets import ImageFolder
 import torchvision.transforms as transforms
 
-import cv2 as cv
 from tools.plot import xywha2xyxyxyxy
 from tools.augments import vertical_flip, horisontal_flip, rotate, gaussian_noise
 

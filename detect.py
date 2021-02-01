@@ -1,7 +1,6 @@
 import torch
 import time
 import argparse
-from torch.utils.data import DataLoader
 from tools.plot import load_class_names, plot_boxes
 from tools.post_process import post_process
 from tools.load import ImageDataset
@@ -11,6 +10,7 @@ from model.model import Yolo
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--image_folder", type=str, default="data/detect", help="path to dataset")
+    parser.add_argument("--output_folder", type=str, default="outputs", help="path to outputs")
     parser.add_argument("--weights_path", type=str, default="weights/AOD_800.pth", help="path to weights file")
     parser.add_argument("--class_path", type=str, default="data/coco.names", help="path to class label file")
     parser.add_argument("--conf_thres", type=float, default=0.7, help="object confidence threshold")
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     model.eval()
 
     dataset = ImageDataset(args.image_folder, img_size=args.img_size)
-    dataloader = DataLoader(dataset, batch_size=args.batch_size, shuffle=False)
+    dataloader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size, shuffle=False)
 
     boxes = []
     imgs = []
@@ -60,7 +60,7 @@ if __name__ == "__main__":
         imgs.extend(img_path)
 
     for i, (img_path, box) in enumerate(zip(imgs, boxes)):
-        plot_boxes(img_path, box, class_names, args.img_size)
+        plot_boxes(img_path, box, class_names, args.img_size, args.output_folder)
 
     end = time.time()
 

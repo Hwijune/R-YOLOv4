@@ -10,7 +10,7 @@ def R(theta):
         theta: must be radian
     Returns: rotation matrix
     """
-    r = np.array([[np.cos(theta), -np.sin(theta), 0], [np.sin(theta), np.cos(theta), 0], [0, 0, 1]])
+    r = torch.tensor([[torch.cos(theta), -torch.sin(theta), 0], [torch.sin(theta), torch.cos(theta), 0], [0, 0, 1]])
     return r
 
 
@@ -20,12 +20,12 @@ def T(x, y):
         x, y: values to translate
     Returns: translation matrix
     """
-    t = np.array([[1, 0, x], [0, 1, y], [0, 0, 1]])
+    t = torch.tensor([[1, 0, x], [0, 1, y], [0, 0, 1]])
     return t
 
 
 def rotate(center_x, center_y, a, p):
-    P = np.dot(T(center_x, center_y), np.dot(R(a), np.dot(T(-center_x, -center_y), p)))
+    P = torch.matmul(T(center_x, center_y), torch.matmul(R(a), torch.matmul(T(-center_x, -center_y), p)))
     return P[:2]
 
 
@@ -40,11 +40,11 @@ def xywha2xyxyxyxy(p):
     x1, y1, x2, y2 = x + w / 2, y - h / 2, x + w / 2, y + h / 2
     x3, y3, x4, y4 = x - w / 2, y + h / 2, x - w / 2, y - h / 2
 
-    P1 = np.array((x1, y1, 1)).reshape(3, -1)
-    P2 = np.array((x2, y2, 1)).reshape(3, -1)
-    P3 = np.array((x3, y3, 1)).reshape(3, -1)
-    P4 = np.array((x4, y4, 1)).reshape(3, -1)
-    P = np.stack((P1, P2, P3, P4)).squeeze(2).T
+    P1 = torch.tensor((x1, y1, 1)).reshape(3, -1)
+    P2 = torch.tensor((x2, y2, 1)).reshape(3, -1)
+    P3 = torch.tensor((x3, y3, 1)).reshape(3, -1)
+    P4 = torch.tensor((x4, y4, 1)).reshape(3, -1)
+    P = torch.stack((P1, P2, P3, P4)).squeeze(2).T
     P = rotate(x, y, a, P)
     X1, X2, X3, X4 = P[0]
     Y1, Y2, Y3, Y4 = P[1]
@@ -64,10 +64,10 @@ def xywh2xyxy(x):
 def skewiou(box1, box2):
     assert len(box1) == 5 and len(box2[0]) == 5
     iou = []
-    g = np.stack(xywha2xyxyxyxy(box1))
+    g = torch.stack(xywha2xyxyxyxy(box1))
     g = Polygon(g.reshape((4, 2)))
     for i in range(len(box2)):
-        p = np.stack(xywha2xyxyxyxy(box2[i]))
+        p = torch.stack(xywha2xyxyxyxy(box2[i]))
         p = Polygon(p.reshape((4, 2)))
         if not g.is_valid or not p.is_valid:
             print("something went wrong in skew iou")
