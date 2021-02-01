@@ -25,7 +25,8 @@ I implemented the loss function proposed by [R3Det: Refined Single-Stage Detecto
 ---
 #### Scheduler
 Cosine Annealing with Warmup (Reference: [Cosine Annealing with Warmup for PyTorch](https://github.com/katsura-jp/pytorch-cosine-annealing-with-warmup))
-<img src="./images/scheduler.png" alt="scheduler" height="70"/>
+</br></br></br>
+<img src="./images/scheduler.png" alt="scheduler" height="120"/>
 
 ---
 #### Recall
@@ -46,7 +47,7 @@ $ pip install -r requirements.txt
 
 2. Download dataset and weights
 
-* Dataset </br>
+* Dataset c
 I have  provided some datasets example on my github. Still, you have to download the others by yourself and arrange it in the correct directories like I do.
 * Weights </br>
 [yolov4 pretrained weights](https://drive.google.com/uc?export=download&id=1UDp_DB2gbPSzBIpgAJuLIFqu8hgl57Ip) </br>
