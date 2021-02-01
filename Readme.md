@@ -26,7 +26,7 @@ I implemented the loss function proposed by [R3Det: Refined Single-Stage Detecto
 #### Scheduler
 Cosine Annealing with Warmup (Reference: [Cosine Annealing with Warmup for PyTorch](https://github.com/katsura-jp/pytorch-cosine-annealing-with-warmup))
 </br>
-<img src="./images/scheduler.png" alt="scheduler"/>
+<img src="./images/scheduler.png" alt="scheduler" height="200"/>
 
 ---
 #### Recall
